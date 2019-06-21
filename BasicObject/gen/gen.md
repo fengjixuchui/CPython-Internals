@@ -1,6 +1,6 @@
 # gen
 
-### contents
+# contents
 
 * [related file](#related-file)
 * [generator](#generator)
@@ -14,13 +14,13 @@
     * [example async generator](#example-async-generator)
     * [free list](#free-list)
 
-### related file
+# related file
 * cpython/Objects/genobject.c
 * cpython/Include/genobject.h
 
-### generator
+# generator
 
-#### memory layout generator
+## memory layout generator
 
 there's a common defination among **generator**, **coroutine** and **async generator**
 
@@ -63,7 +63,7 @@ we can draw the layout according to the code now
 
 ![layout_gen](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/gen/layout_gen.png)
 
-#### example generator
+## example generator
 
 let's define and iter through a generator
 
@@ -198,7 +198,7 @@ the **f_lasti** is in the position of the second **except** statement, **exc_typ
 
 the **f_lasti** is in the position of the first **finally** statement, the ModuleNotFoundError is handled properly, at the top of the exception stack is the **ZeroDivisionError**
 
-there will be another article talking about the [exception handling](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/exception/exception.md)
+actually the information about [exception handling](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/exception/exception.md) is stored in [frame object](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/frame/frame.md), **gi_exec_state** is used for representing whether current generator ojbect is handling exception and the detail of the most nested exception
 
     >>> r = f.send("handsome8")
     result 'handsome8'
@@ -235,9 +235,9 @@ and states in **gi_exc_state** is restored
 
 ![example_gen_5](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/gen/example_gen_5.png)
 
-### coroutine
+# coroutine
 
-#### memory layout coroutine
+## memory layout coroutine
 
 most parts of the definition of the **coroutine** type and **generator** are the same
 
@@ -245,7 +245,7 @@ the coroutine-only field named **cr_origin**, tracking the trackback of the **co
 
 ![layout_coro](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/gen/layout_coro.png)
 
-#### example coroutine
+## example coroutine
 
 let's try to run an example with **coroutine** type defined to understand each field's meaning
 
@@ -333,15 +333,15 @@ in the 6.01 seconds, both **cor_list[0]** and **cor_list[1]** returned, and thei
 
 ![example_coro_3](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/gen/example_coro_3.png)
 
-### async generator
+# async generator
 
-#### memory layout async generator
+## memory layout async generator
 
 the layout of **async generator** is the same as **generator** type, except for the **ag_finalizer**, **ag_hooks_inited** and **ag_closed**
 
 ![layout_async_gen](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/gen/layout_async_gen.png)
 
-#### example async generator
+## example async generator
 
 the **set_asyncgen_hooks** function is used for setting up a **firstiter** and a **finalizer**, **firstiter** will be called before when an asynchronous generator is iterated for the first time, finalizer will be called when asynchronous generator is about to be gc
 
@@ -357,7 +357,7 @@ the **run_forever** function in asyncio base event loop has defined
         finally:
             sys.set_asyncgen_hooks(*old_agen_hooks)
 
-you can define your own event loop to override the default **firstiter** and **finalizer**, please refer to [oython3-doc set_asyncgen_hooks](https://docs.python.org/3/library/sys.html#sys.set_asyncgen_hooks) for more detail
+you can define your own event loop to override the default **firstiter** and **finalizer**, please refer to [poython3-doc set_asyncgen_hooks](https://docs.python.org/3/library/sys.html#sys.set_asyncgen_hooks) for more detail
 
     # example of set_asyncgen_hooks
     import sys
@@ -419,7 +419,7 @@ let's define and iter through an async iterator
 
 iterate through it
 
-if you need more detail of _\_aiter_\_, _\_anext_\_ and etc, please refer to [pep-0525](https://www.python.org/dev/peps/pep-0525/)
+if you need more detail of `__aiter__`, `__anext__` and etc, please refer to [pep-0525](https://www.python.org/dev/peps/pep-0525/)
 
     >>> a(None)
     result None
@@ -427,7 +427,7 @@ if you need more detail of _\_aiter_\_, _\_anext_\_ and etc, please refer to [pe
     >>> a.f.ag_frame.f_lasti
     68
 
-the **ag_weakreflist** points to a weak reference created by **BaseEventLoop(asyncio->base_events.py)**
+the **ag_weakreflist** points to a weak reference created by **BaseEventLoop(`asyncio->base_events.py`)**
 
 it's used for shutdown all active asynchronous generators, read the [source code](https://github.com/python/cpython/blob/3.7/Lib/asyncio/base_events.py) for more detail
 
@@ -469,13 +469,13 @@ now, the **f_lasti** indicate the position of the second **yield** stateement in
       File "<stdin>", line 6, in make_the_call
     StopAsyncIteration
 
-now, the **ag_closed** is set to 1 because of the termination of the async generator(**StopAsyncIteration** raised or aclose() is called)
+now, the **ag_closed** is set to 1 because of the termination of the async generator(**StopAsyncIteration** raised or `aclose()` is called)
 
 the **ag_frame** is deallocated
 
 ![example_async_gen3](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/gen/example_async_gen_3.png)
 
-#### free list
+## free list
 
 the free list mechanism is used for type **async_generator_asend** and **async_generator_wrapped_value**
 

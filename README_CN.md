@@ -11,7 +11,7 @@
     cd cpython
     git reset --hard ab54b9a130c88f708077c2ef6c4963b632c132b3
 
-### 目录
+# 目录
 
 * [基本对象](#基本对象)
 * [模块](#模块)
@@ -20,7 +20,7 @@
 * [学习资料](#学习资料)
 
 
-#### 基本对象
+# 基本对象
 - [x] [dict](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/dict/dict_cn.md)
 - [x] [long/int](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/long/long_cn.md)
 - [x] [unicode/str](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/str/str_cn.md)
@@ -39,17 +39,17 @@
 - [x] [enum](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/enum/enum_cn.md)
 - [ ] type
 
-#### 模块
+# 模块
 
  - [ ] io
  	- [x] [fileio](https://github.com/zpoint/CPython-Internals/blob/master/Modules/io/fileio/fileio_cn.md)
 
-#### 库
+# 库
 
  - [x] [re(正则)](https://github.com/zpoint/CPython-Internals/blob/master/Modules/re/re_cn.md)
  - [ ] asyncio
 
-#### 解释器相关
+# 解释器相关
 
  - [x] [frame](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/frame/frame_cn.md)
  - [x] [code](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/code/code_cn.md)
@@ -57,13 +57,13 @@
  - [x] [exception(异常处理机制)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/exception/exception_cn.md)
  - [x] [module(import实现机制)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/module/module_cn.md)
  - [ ] namespace
- - [x] [gil](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/gil/gil_cn.md)
- - [ ] [gc](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/gc/gc_cn.md)
- - [ ] memory management
+ - [x] [gil(全局解释器锁)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/gil/gil_cn.md)
+ - [x] [gc(垃圾回收机制)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/gc/gc_cn.md)
+ - [ ] [memory management](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/memory_management/memory_management_cn.md)
  - [ ] thread
  - [ ] interpreter
 
-#### 学习资料
+# 学习资料
 
 以下的资料笔者遵循先阅读后推荐的原则
 
