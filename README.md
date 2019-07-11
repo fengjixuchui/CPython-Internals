@@ -38,7 +38,7 @@ Trying to illustrate every detail of cpython implementation
  - [x] [class(bound method/classmethod/staticmethod)](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/class/class.md)
  - [x] [complex](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/complex/complex.md)
  - [x] [enum](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/enum/enum.md)
- - [ ] type
+ - [x] [type(mro/metaclass)](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/type/type.md)
 
 # Modules
 
@@ -52,15 +52,16 @@ Trying to illustrate every detail of cpython implementation
 
 # Interpreter
 
- - [x] [frame](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/frame/frame.md)
- - [x] [code](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/code/code.md)
- - [x] [descr(how does attribute access work/`__get__`/`__set__`)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/descr/descr.md)
- - [x] [exception(exception handling)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/exception/exception.md)
- - [x] [module(how does import work)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/module/module.md)
- - [ ] namespace
  - [x] [gil(Global Interpreter Lock)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/gil/gil.md)
  - [x] [gc(Garbage Collection)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/gc/gc.md)
- - [ ] [memory management](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/memory_management/memory_management.md)
+ - [x] [memory management](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/memory_management/memory_management.md)
+ - [x] [descr(how does attribute access work/`__get__`/`__getattribute__`/`__getattr__`)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/descr/descr.md)
+ - [x] [exception(exception handling)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/exception/exception.md)
+ - [x] [module(how does import work)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/module/module.md)
+ - [x] [frame](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/frame/frame.md)
+ - [x] [code](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/code/code.md)
+ - [x] [slot/`__slots__`](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/slot/slot.md)
+ - [ ] namespace
  - [ ] thread
  - [ ] interpreter
 
