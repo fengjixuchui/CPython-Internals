@@ -75,7 +75,7 @@
 
 ![instance_desc](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/slot/instance_desc.png)
 
-根据 **descriptor protocol** 第一步找到的对象未 `descr`, 类型为 `member_descriptor`, 如果你执行
+根据 **descriptor protocol** 第一步找到的对象为 `descr`, 类型为 `member_descriptor`, 如果你执行
 
 	repr(descr)
     descr: <member 'wing' of 'A' objects>
@@ -168,7 +168,7 @@
 
 对于属性 `x` 并无特殊处理, 保存在 `tp_dict` 字段指向的字典中
 
-并且 `tp_dict` 字段指向的字典中没有 `"__dict__"` 这个 key (只要定义了 `__slots__` 的类型都不会有ß)
+并且 `tp_dict` 字段指向的字典中没有 `"__dict__"` 这个 key (只要定义了 `__slots__` 的类型都不会有)
 
 ![type_create](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/slot/type_create.png)
 
@@ -215,8 +215,8 @@
 下面的伪代码翻译了 C 语言中搜索过程
 
 	res = None
-    for each_type in type(a).__mro__
-    	if "wing" each_type.__dict__:
+    for each_type in type(a).__mro__:
+    	if "wing" in each_type.__dict__:
         	res = each_type.__dict__["wing"]
             break
     # 接下来是另一篇文章提到的属性访问过程
@@ -226,7 +226,7 @@
         # res 在这里是 A.wing, 它的类型是 member_descriptor
         # 它存储了这个属性的位置偏移等信息, 实例可以根据这个上面的信息快速的获取到需要的对象
         # member_descriptor.__get__ 会找到 a + offset 的地址, 并把这个地址强制转换为 PyObject *, 并返回给调用着
-    	return res.__get__(a, type(a))
+        return res.__get__(a, type(a))
     ...
 
 ![access_slot_attribute](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/slot/access_slot_attribute.png)
@@ -240,16 +240,19 @@
       File "<input>", line 1, in <module>
     AttributeError: 'A' object has no attribute 'not_exist'
 
-根据 [descr](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/descr/descr_cn.md) 中提到的 descriptor protocol, 我们可以同样写出下面的伪代码
+根据 [descr](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/descr/descr_cn.md) 中提到的 **descriptor protocol** 过程, 我们可以同样写出下面的伪代码
 
 	res = None
 	for each_type in type(a).__mro__:
-   		if "not_exist" each_type.__dict__:
+   		if "not_exist" in each_type.__dict__:
         	res = each_type.__dict__["not_exist"]
         	break
     if res is None:
-    	# 这是属性访问的另一种情况, 此时会进到这里
-    	try to find wing" in a.__dict__
+        # 尝试在 a.__dict__ 中查找 "not_exist"
+        if not hasattr(a, "__dict__") or "not_exist" not in a.__dict__:
+        	# 运行到这里
+        	raise AttributeError
+        return a.__dict__["not_exist"]
 
 当定义了 `__slots__` 时, `type(a)` 中的 `tp_dictoffset` 值为 0, 表示实例 `a` 并不存在 `__dict__` 属性, 也就是说没有存储其他任何属性的位置, 上面进入的搜索分支会识别这种情况并报错
 
@@ -291,11 +294,15 @@
 
 	res = None
 	for each_type in type(a).__mro__:
-   		if "not_exist" each_type.__dict__:
+   		if "not_exist" in each_type.__dict__:
         	res = each_type.__dict__["not_exist"]
         	break
     if res is None:
-    	try to find "not_exist" in a.__dict__
+        # 尝试在 a.__dict__ 中查找 "not_exist"
+        if not hasattr(a, "__dict__") or "not_exist" not in a.__dict__:
+        	raise AttributeError
+        # 运行到这里
+        return a.__dict__["not_exist"]
 
 这一次没有定义 `__slots__`, `type(a)` 中的 `tp_dictoffset` 值为 16, 表示实例 `a` 拥有 `__dict__` 属性, 可以存储任意其他的属性名称, 这个 `__dict__` 对象的地址为 `(char *)a + 16`
 
@@ -339,7 +346,7 @@
 
     used 56.0234 MiB RAM in 0.34s, peaked 0.00 MiB above current, total RAM usage 97.63 MiB
 
-没有 `__slots__` 的情况下内存消耗几乎是有 `__slots__` 的情况下的两倍, 主要原因是有 `__slots__` 的时候属性的空间是在实例创建时一次性预分配好的, 而没有 `__slots__` 的时候需要创建一个额外的 [dict 对象](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/dict/dict_cn.md) 用来存储, 新增, 删除属性, 虽然时间复杂度类似, 但是 [dict 对象](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/dict/dict_cn.md) 本身字典结构存储需要空间, 并且在当前版本下即使创建了空的字典, 本身也会预分配 8 个对象的空间, 这些都是额外开销
+没有 `__slots__` 的情况下内存消耗几乎是有 `__slots__` 的情况下的两倍, 主要原因是有 `__slots__` 的时候属性的空间是在实例创建时一次性预分配好的, 存储的是指向 python 元素的指针, 每个 指针占用 8 字节的空间, 而没有 `__slots__` 的时候需要创建一个额外的 [dict 对象](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/dict/dict_cn.md) 用来存储, 新增, 删除属性, 虽然时间复杂度类似, 但是 [dict 对象](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/dict/dict_cn.md) 本身字典结构存储需要空间, 并且在当前版本下即使创建了空的字典, 本身也会预分配 8 个对象的空间, 即使是一个空字典也至少是需要一打指针的空间来存储, 这些都是额外开销
 
 # 相关阅读
 * [`__slots__`magic](http://book.pythontips.com/en/latest/__slots__magic.html)
