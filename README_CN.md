@@ -1,6 +1,7 @@
 # Cpython Internals
 
 * [English](https://github.com/zpoint/CPython-Internals/blob/master/README.md)
+* [한국어](https://github.com/zpoint/CPython-Internals/blob/master/README_KR.md)
 * 如果你需要接收更新通知, 点击右上角的 **Watch**, 当有文章更新时会在 issue 发布相关标题和链接
 * 如果有任何链接无法打开请自行搭梯子O(∩_∩)O
 
@@ -42,7 +43,7 @@
 - [x] [class(bound method/classmethod/staticmethod)](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/class/class_cn.md)
 - [x] [complex](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/complex/complex_cn.md)
 - [x] [enum](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/enum/enum_cn.md)
-- [x] [type(mro/metaclass)](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/type/type_cn.md)
+- [x] [type(mro/metaclass/类/实例的创建过程)](https://github.com/zpoint/CPython-Internals/blob/master/BasicObject/type/type_cn.md)
 
 # 模块
 
@@ -65,7 +66,7 @@
  - [x] [module(import实现机制)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/module/module_cn.md)
  - [x] [frame](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/frame/frame_cn.md)
  - [x] [code](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/code/code_cn.md)
- - [x] [slots/`__slots__`](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/slot/slot_cn.md)
+ - [x] [slots/`__slots__`(属性在类/实例创建时是如何初始化的)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/slot/slot_cn.md)
  - [x] [thread(线程)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/thread/thread_cn.md)
  - [x] [PyObject(基础篇/概述)](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/pyobject/pyobject_cn.md)
 
