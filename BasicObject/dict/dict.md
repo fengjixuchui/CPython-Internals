@@ -1,4 +1,4 @@
-# dict
+# dict![image title](http://www.zpoint.xyz:8080/count/tag.svg?url=github%2FCPython-Internals/dict)
 
 # contents
 
@@ -26,7 +26,7 @@
 * cpython/Include/cpython/dictobject.h
 
 
-# evolvement and implementation
+# evolution and implementation
 
 before we dive into the memory layout of python dictionary, let's imagine what normal dictionary object looks like
 

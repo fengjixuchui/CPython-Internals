@@ -1,4 +1,4 @@
-# gc
+# gc![image title](http://www.zpoint.xyz:8080/count/tag.svg?url=github%2FCPython-Internals/gc_cn)
 
 * 长文, 预计阅读时间在十五分钟以上
 
@@ -408,7 +408,7 @@ CPython 总共使用了 3 代, 新创建的对象都会被存储到第一代中(
 
 ### finalizer
 
-如果一个需要被垃圾回收的对象定义了自己的 `__del__` 怎么办呢? 毕竟有可能在 `__del__` 中增加了新的引用
+如果一个存在引用循环等非常规的对象, 需要被垃圾回收, 并且定义了自己的 `__del__` 怎么办呢? 毕竟有可能在 `__del__` 中增加了新的引用
 
 在 python3.4 之前, 这部分对象会被移动到 `gc.garbage` 中, 你需要手动调用他们的 `__del__` 方法并且对他们进行回收
 
@@ -504,7 +504,7 @@ CPython 中一共有 3 代, 对应了 3 个 **threshold**, 每一代对应一个
 一个方式是直接调用 `gc.collect()`, 不传参数的情况下直接从最老年代开始回收
 
 ```python3
->>> imporr gc
+>>> import gc
 >>> gc.collect()
 
 ```
@@ -539,3 +539,6 @@ CPython 中一共有 3 代, 对应了 3 个 **threshold**, 每一代对应一个
 
 * [Garbage collection in Python: things you need to know](https://rushter.com/blog/python-garbage-collector/)
 * [the garbage collector](https://pythoninternal.wordpress.com/2014/08/04/the-garbage-collector/)
+
+* [关于 `__del__` 和 `finalizers` 和 `unreachable`](https://github.com/zpoint/CPython-Internals/issues/28)
+

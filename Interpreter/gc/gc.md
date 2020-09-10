@@ -1,4 +1,4 @@
-# gc
+# gc![image title](http://www.zpoint.xyz:8080/count/tag.svg?url=github%2FCPython-Internals/gc)
 
 * you may need more than 15 minutes to read this article
 
@@ -400,7 +400,7 @@ all objects survive this round of garbage collections will be moved to the elder
 
 ### finalizer
 
-what if the object needed to be garbage collected has defined it's own finalizer ?
+what if an unusual object(which contains cyclic reference) needed to be garbage collected has defined it's own finalizer ?
 
 before python3.4, those objects won't be collected, they will be moved to `gc.garbage` and you need to call `__del__` and collect them manually
 
@@ -494,7 +494,7 @@ gc.set_threshold(100, 20)
 one way is to call `gc.collect()` manually, it will collect the highest collection directly
 
 ```python3
->>> imporr gc
+>>> import gc
 >>> gc.collect()
 
 ```
@@ -530,3 +530,5 @@ while other garbage collector in other programming language such as [Java-g1](ht
 
 * [Garbage collection in Python: things you need to know](https://rushter.com/blog/python-garbage-collector/)
 * [the garbage collector](https://pythoninternal.wordpress.com/2014/08/04/the-garbage-collector/)
+* [关于 `__del__` 和 `finalizers` 和 `unreachable`](https://github.com/zpoint/CPython-Internals/issues/28)
+

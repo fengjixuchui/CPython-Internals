@@ -1,4 +1,4 @@
-# Cpython Internals
+# Cpython Internals![image title](http://www.zpoint.xyz:8080/count/tag.svg?url=github%2FCPython-Internals)
 
 ![cpython logo](https://docs.google.com/drawings/d/e/2PACX-1vQKKPvv9xI22zZcRtElIMx_-G22qYcLUvl-gbngubjf76dr80ZjsYQZCCKVqEvJnmBnwZyDXqG9GPlu/pub?w=300&h=200) 
 
@@ -14,7 +14,6 @@ Trying to illustrate every detail of cpython implementation
 # based on version 3.8.0a0
 cd cpython
 git reset --hard ab54b9a130c88f708077c2ef6c4963b632c132b3
-
 ```
 
 The following contents are suitable for those who have python programming experience and interested in internal of python interpreter, for those who needs beginner or advanced material please refer to [awesome-python-books](https://github.com/Junnplus/awesome-python-books)
@@ -83,9 +82,10 @@ The following contents are suitable for those who have python programming experi
 
 # Grammar
 
-I will come back to this part when I finish reading [< < Compilers > >](https://www.amazon.com/Compilers-Principles-Techniques-Tools-2nd/dp/0321486811) and [< < SICP > >](https://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871) and have a better understanding of this kind of stuffs
-
-In the meantime, my routine work will have a higher priority, so you may need months to see updates in this part
+ - [x] [Compile Phase](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/compile/compile.md)
+    - [x] [Grammar/MetaGrammar to DFA](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/compile/compile.md)
+    - [x] [CST to AST](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/compile2/compile.md)
+    - [x] [AST to python byte code](https://github.com/zpoint/CPython-Internals/blob/master/Interpreter/compile3/compile.md)
 
 
 # Learning material
@@ -99,6 +99,7 @@ I will only recommend what I've read
 * [YET ANOTHER PYTHON INTERNALS BLOG(blog/eng)](https://pythoninternal.wordpress.com/)
 * [Junnplus(blog/cn)](https://github.com/Junnplus/blog/issues)
 * [manjusaka(blog/cn)](https://manjusaka.itscoder.com/)
+* [aoik-Python's compiler series(blog/eng)](https://aoik.me/blog/posts/python-compiler-from-grammar-to-dfa)
 
 # Contribution
 
